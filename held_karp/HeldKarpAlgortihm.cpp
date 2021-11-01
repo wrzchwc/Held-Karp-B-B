@@ -7,24 +7,29 @@
 void HeldKarpAlgortihm::travellingSalesman(AdjacencyMatrix *matrix) {
     int size = matrix->getSize();
     int *vertexes = matrix->getVertexes(true);
+    vector<int> set(vertexes, vertexes + size);
     map<string, int> costs;
 
     for (int i = 1; i < size; i++) {
         costs[to_string(i)] = matrix->getData(0, i);
     }
 
-    for (int i = 1; i < size-1; i++) {
+    for (int i = 1; i < 3; i++) {
+        //subset is a set of vertices, we go through
         for (const auto &subset: getSubsets(vertexes, size, i)) {
-            cout<<"via: "<<getKey(subset)<<endl;
-            for (int j = 1; j < size; j++) {
-                //if this if is true, we know, that
-                if(count(subset.begin(),  subset.end(), j)==0){
-                    cout<<"to "<<j<<": ";
-                    cout<<costs[getKey(subset)]+matrix->getData(subset.at(0),j)<<endl;
-                    costs[to_string(j).append(getKey(subset))] = costs[getKey(subset)]+matrix->getData(subset.at(0),j);
-                }
+            cout << "via: " <<getKey(subset)<< endl;
+            vector<int> diff; //each vertex in the diff is a vertex we can get to
+            set_difference(set.begin() + 1, set.end(), subset.begin(), subset.end(), inserter(diff, diff.begin()));
+            for (int d: diff) {
+                cout << "to " << d << ": ";
+                //new cost is a sum of cost of going through subset and final fragment
+                auto old_key = getKey(subset);
+                cout << costs[old_key] + matrix->getData(subset.at(0), d) << endl;
+                auto new_key = to_string(d).append(getKey(subset));
+                costs[new_key] = costs[old_key] + matrix->getData(subset.at(0), d);
             }
-            cout<<endl;
+
+            cout << endl;
         }
     }
 
@@ -60,6 +65,8 @@ string HeldKarpAlgortihm::getKey(const vector<int> &subset) {
     }
     return key;
 }
+
+
 
 
 
