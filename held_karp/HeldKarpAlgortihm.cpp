@@ -1,16 +1,32 @@
 #include <algorithm>
+#include <iterator>
 #include <string>
 #include <map>
 #include "HeldKarpAlgortihm.h"
 
 void HeldKarpAlgortihm::travellingSalesman(AdjacencyMatrix *matrix) {
-    auto size = matrix->getSize();
-    map<string, int> mappings;
+    int size = matrix->getSize();
+    int *vertexes = matrix->getVertexes(true);
+    map<string, int> costs;
+
     for (int i = 1; i < size; i++) {
-        mappings[to_string(i)] = matrix->getData(i, 0);
+        costs[to_string(i)] = matrix->getData(0, i);
     }
 
-
+    for (int i = 1; i < size-1; i++) {
+        for (const auto &subset: getSubsets(vertexes, size, i)) {
+            cout<<"via: "<<getKey(subset)<<endl;
+            for (int j = 1; j < size; j++) {
+                //if this if is true, we know, that
+                if(count(subset.begin(),  subset.end(), j)==0){
+                    cout<<"to "<<j<<": ";
+                    cout<<costs[getKey(subset)]+matrix->getData(subset.at(0),j)<<endl;
+                    costs[to_string(j).append(getKey(subset))] = costs[getKey(subset)]+matrix->getData(subset.at(0),j);
+                }
+            }
+            cout<<endl;
+        }
+    }
 
 
 }
