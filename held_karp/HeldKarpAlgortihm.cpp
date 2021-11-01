@@ -16,19 +16,32 @@ void HeldKarpAlgortihm::travellingSalesman(AdjacencyMatrix *matrix) {
 
     for (int i = 1; i < 3; i++) {
         //subset is a set of vertices, we go through
-        for (const auto &subset: getSubsets(vertexes, size, i)) {
-            cout << "via: " <<getKey(subset)<< endl;
+        for (auto &subset: getSubsets(vertexes, size, i)) {
+            cout << "via: " << getKey(subset) << endl;
             vector<int> diff; //each vertex in the diff is a vertex we can get to
             set_difference(set.begin() + 1, set.end(), subset.begin(), subset.end(), inserter(diff, diff.begin()));
             for (int d: diff) {
                 cout << "to " << d << ": ";
                 //new cost is a sum of cost of going through subset and final fragment
                 auto old_key = getKey(subset);
-                cout << costs[old_key] + matrix->getData(subset.at(0), d) << endl;
                 auto new_key = to_string(d).append(getKey(subset));
-                costs[new_key] = costs[old_key] + matrix->getData(subset.at(0), d);
+                int value;
+                if (subset.size() == 1) {
+                    value = costs[old_key] + matrix->getData(subset.at(0), d);
+                } else {
+                    vector<int> min_values;
+                    for (int j = 0; j < subset.size(); j++) {
+                        auto tmp = subset.at(j);
+                        subset.erase(subset.begin() + j);
+                        string key = to_string(tmp).append(getKey(subset));
+                        min_values.push_back(costs[key] + matrix->getData(tmp, d));
+                        subset.insert(subset.begin() + j, tmp);
+                    }
+                    value = *min_element(min_values.begin(), min_values.end());
+                }
+                cout << value << endl;
+                costs[new_key] = value;
             }
-
             cout << endl;
         }
     }
