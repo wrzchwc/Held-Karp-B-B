@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <iterator>
 #include <string>
-#include <map>
 #include "HeldKarp.h"
 
 void HeldKarp::travelling_salesman() {
@@ -11,25 +10,20 @@ void HeldKarp::travelling_salesman() {
 
 
     for (int i = 1; i < size - 1; i++) {
-        //subset is a set of vertices, we go through
-        for (auto &subset: getSubsets(vertexes, size, i)) {
-//            cout << "via: " << getKey(subset) << endl;
-            vector<int> diff; //each vertex in the diff is a vertex we can get to
+        for (vector<int> subset: getSubsets(vertexes, size, i)) {
+            vector<int> diff;
             set_difference(set.begin() + 1, set.end(), subset.begin(), subset.end(), inserter(diff, diff.begin()));
             for (int d: diff) {
-//                cout << "to " << d << ": ";
-                //new cost is a sum of cost of going through subset and final fragment
-                auto new_key = to_string(d).append(getKey(subset));
+                vector<int> new_key({d});
+                new_key.insert(new_key.end(), subset.begin(), subset.end());
                 int value;
                 if (subset.size() == 1) {
-                    value = costs[getKey(subset)] + matrix->getData(subset.at(0), d);
+                    value = costs[subset] + matrix->getData(subset.at(0), d);
                 } else {
                     value = get_optimum(subset, d);
                 }
-//                cout << value << endl;
                 costs[new_key] = value;
             }
-//            cout << endl;
         }
     }
 
@@ -70,13 +64,8 @@ HeldKarp::HeldKarp(AdjacencyMatrix *matrix) {
     this->matrix = matrix;
 
     for (int i = 1; i < matrix->getSize(); i++) {
-        this->costs[to_string(i)] = matrix->getData(0, i);
+        this->costs[{i}] = matrix->getData(0, i);
     }
-
-//    cout<<"Mapped values"<<endl;
-//    for (const auto& cost:costs) {
-//        cout<<cost.first<<" "<<cost.second<<endl;
-//    }
 }
 
 int HeldKarp::get_hamiltonian_cycle(int *array) {
@@ -86,7 +75,8 @@ int HeldKarp::get_hamiltonian_cycle(int *array) {
     for (int i = 0; i < set.size(); i++) {
         auto tmp = set.at(i);
         set.erase(set.begin() + i);
-        string key = to_string(tmp).append(getKey(set));
+        vector<int> key({tmp});
+        key.insert(key.end(), set.begin(), set.end());
         tsp_set.push_back(costs[key] + matrix->getData(tmp, 0));
         set.insert(set.begin() + i, tmp);
     }
@@ -99,11 +89,17 @@ int HeldKarp::get_optimum(vector<int> &subset, int vertex) {
     for (int i = 0; i < subset.size(); i++) {
         auto tmp = subset.at(i);
         subset.erase(subset.begin() + i);
-        string key = to_string(tmp).append(getKey(subset));
+        vector<int> key({tmp});
+        key.insert(key.end(), subset.begin(),  subset.end());
         set.push_back(costs[key] + matrix->getData(tmp, vertex));
         subset.insert(subset.begin() + i, tmp);
     }
     return *min_element(set.begin(), set.end());
+}
+
+void HeldKarp::displayKey(vector<int> v) {
+    for_each(v.begin(), v.end(), [](const int &n) { cout << n << " "; });
+    cout << endl;
 }
 
 

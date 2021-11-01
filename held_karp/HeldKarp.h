@@ -15,7 +15,9 @@ private:
 
     int get_optimum(vector<int> &subset, int vertex);
 
-    map<string, int> costs;
+    map<vector<int>, int> costs;
+
+    static void displayKey(vector<int> v);
 
     AdjacencyMatrix *matrix;
 
