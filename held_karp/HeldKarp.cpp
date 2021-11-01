@@ -52,14 +52,6 @@ vector<vector<int>> HeldKarp::getSubsets(int *array, int arraySize, int subsetSi
     return subsets;
 }
 
-string HeldKarp::getKey(const vector<int> &subset) {
-    string key;
-    for (int s: subset) {
-        key.append(to_string(s));
-    }
-    return key;
-}
-
 HeldKarp::HeldKarp(AdjacencyMatrix *matrix) {
     this->matrix = matrix;
 

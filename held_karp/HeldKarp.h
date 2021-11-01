@@ -9,8 +9,6 @@ class HeldKarp {
 private:
     static vector<vector<int>> getSubsets(int *array, int arraySize, int subsetSize);
 
-    static string getKey(const vector<int> &subset);
-
     int get_hamiltonian_cycle(int *array);
 
     int get_optimum(vector<int> &subset, int vertex);
