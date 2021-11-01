@@ -2,9 +2,9 @@
 #include <iterator>
 #include <string>
 #include <map>
-#include "HeldKarpAlgortihm.h"
+#include "HeldKarpAlgorithm.h"
 
-void HeldKarpAlgortihm::travellingSalesman(AdjacencyMatrix *matrix) {
+void HeldKarpAlgorithm::travellingSalesman(AdjacencyMatrix *matrix) {
     int size = matrix->getSize();
     int *vertexes = matrix->getVertexes(true);
     vector<int> set(vertexes, vertexes + size);
@@ -14,7 +14,7 @@ void HeldKarpAlgortihm::travellingSalesman(AdjacencyMatrix *matrix) {
         costs[to_string(i)] = matrix->getData(0, i);
     }
 
-    for (int i = 1; i < 3; i++) {
+    for (int i = 1; i < size - 1; i++) {
         //subset is a set of vertices, we go through
         for (auto &subset: getSubsets(vertexes, size, i)) {
             cout << "via: " << getKey(subset) << endl;
@@ -45,11 +45,21 @@ void HeldKarpAlgortihm::travellingSalesman(AdjacencyMatrix *matrix) {
             cout << endl;
         }
     }
+    auto final_set = getSubsets(vertexes, size, 3).at(0);
+    vector<int> tsp_set;
+    for (int i = 0; i < final_set.size(); i++) {
+        auto tmp = final_set.at(i);
+        final_set.erase(final_set.begin() + i);
+        string key = to_string(tmp).append(getKey(final_set));
+        tsp_set.push_back(costs[key] + matrix->getData(tmp, 0));
+        final_set.insert(final_set.begin() + i, tmp);
+    }
+    cout<<*min_element(tsp_set.begin(),  tsp_set.end())<<endl;
 
 
 }
 
-vector<vector<int>> HeldKarpAlgortihm::getSubsets(int *array, int arraySize, int subsetSize) {
+vector<vector<int>> HeldKarpAlgorithm::getSubsets(int *array, int arraySize, int subsetSize) {
     auto size = arraySize - 1;
     auto binary = new int[size];
     vector<vector<int>> subsets;
@@ -71,7 +81,7 @@ vector<vector<int>> HeldKarpAlgortihm::getSubsets(int *array, int arraySize, int
     return subsets;
 }
 
-string HeldKarpAlgortihm::getKey(const vector<int> &subset) {
+string HeldKarpAlgorithm::getKey(const vector<int> &subset) {
     string key;
     for (int s: subset) {
         key.append(to_string(s));

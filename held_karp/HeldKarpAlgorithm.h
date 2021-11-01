@@ -1,11 +1,11 @@
-#ifndef INC_2_HELDKARPALGORTIHM_H
-#define INC_2_HELDKARPALGORTIHM_H
+#ifndef INC_2_HELDKARPALGORITHM_H
+#define INC_2_HELDKARPALGORITHM_H
 
 #include <set>
 #include <vector>
 #include "../adjacency_matrix/AdjacencyMatrix.h"
 
-class HeldKarpAlgortihm {
+class HeldKarpAlgorithm {
 private:
     static vector<vector<int>> getSubsets(int *array, int arraySize, int subsetSize);
     static string getKey(const vector<int>& subset);
@@ -15,4 +15,4 @@ public:
 };
 
 
-#endif //INC_2_HELDKARPALGORTIHM_H
+#endif //INC_2_HELDKARPALGORITHM_H
