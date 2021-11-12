@@ -23,7 +23,6 @@ AdjacencyMatrix::~AdjacencyMatrix() {
     }
     delete[] matrix;
     matrix = nullptr;
-    name = nullptr;
     size = 0;
 }
 

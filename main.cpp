@@ -6,9 +6,9 @@
 using namespace std;
 
 int main() {
-    auto matrix = new AdjacencyMatrix("m16.txt");
-    auto held_karp = new HeldKarp(matrix);
-    held_karp->travelling_salesman();
+    auto matrix = new AdjacencyMatrix("../cmake-build-debug/instances/gr24.txt");
+    delete matrix;
+
 
     return 0;
 }
