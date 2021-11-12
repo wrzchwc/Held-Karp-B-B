@@ -14,9 +14,6 @@ private:
     //number of vertexes
     int size;
 
-    //name of the matrix
-    string name;
-
     //initializes matrix
     void initializeMatrix();
 
@@ -24,6 +21,8 @@ public:
 
     //constructor loading graph from file
     explicit AdjacencyMatrix(const string &filepath);
+
+    explicit AdjacencyMatrix(AdjacencyMatrix *adjacencyMatrix);
 
     //destructor
     virtual ~AdjacencyMatrix();
@@ -40,8 +39,6 @@ public:
     //returns array containing sorted numbers representing vertexes
     [[nodiscard]] int *getVertexes(bool reversed) const;
 
-    //returns name of the matrix
-    [[nodiscard]] const string &getName() const;
 };
 
 

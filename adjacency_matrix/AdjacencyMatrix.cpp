@@ -38,7 +38,6 @@ AdjacencyMatrix::AdjacencyMatrix(const string &filepath) {
     file.open(filepath, ios::in);
 
     getline(file, tmp);
-    this->name = tmp;
     getline(file, tmp);
     this->size = atoi(tmp.c_str());
     initializeMatrix();
@@ -52,6 +51,17 @@ AdjacencyMatrix::AdjacencyMatrix(const string &filepath) {
         row++;
     }
     file.close();
+}
+
+AdjacencyMatrix::AdjacencyMatrix(AdjacencyMatrix *adjacencyMatrix) {
+    this->size = adjacencyMatrix->getSize();
+    this->matrix = nullptr;
+    initializeMatrix();
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            matrix[i][j] = adjacencyMatrix->getData(i, j);
+        }
+    }
 }
 
 
@@ -77,6 +87,3 @@ void AdjacencyMatrix::initializeMatrix() {
     }
 }
 
-const string &AdjacencyMatrix::getName() const {
-    return name;
-}
