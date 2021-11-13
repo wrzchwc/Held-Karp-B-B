@@ -7,7 +7,7 @@
 class SpaceStateTree {
 private:
     vector<Node*> nodes;
-    vector<Node*> leaves;
+//    vector<Node*> leaves;
 public:
     explicit SpaceStateTree(Node *node);
 

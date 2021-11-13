@@ -12,25 +12,24 @@ void BranchBound::travellingSalesman(AdjacencyMatrix *adjacencyMatrix) {
     infiniteDiagonal(matrix);
     auto reductionCost = reduceMatrix(matrix);
     vector<int> unvisited(vertexes + 1, vertexes + size);
-    auto node = new Node(0, nullptr, matrix, reductionCost, unvisited);
+    auto node = new Node(0, nullptr, matrix, reductionCost, unvisited, true);
     auto tree = new SpaceStateTree(node);
 
     while (!(unvisited.empty())) {
         auto unvisitedSize = unvisited.size();
-        cout<<"current cost: "<<node->getCost();
-
         for (int i = 0; i < unvisitedSize; i++) {
             auto tmp = new AdjacencyMatrix(matrix);
             infiniteMatrix(tmp, node->getID(), unvisited.at(i));
             auto cost = reduceMatrix(tmp) + node->getCost() + matrix->getData(node->getID(), unvisited.at(i));
             vector<int> newUnvisited(unvisited);
-            newUnvisited.erase(newUnvisited.begin()+i);
-            auto newNode = new Node(unvisited.at(i), node, tmp, cost, newUnvisited);
+            newUnvisited.erase(newUnvisited.begin() + i);
+            auto newNode = new Node(unvisited.at(i), node, tmp, cost, newUnvisited, false);
             tree->addNode(newNode);
         }
 
         node = tree->getMinimalLeaf();
-        cout<<" new cost "<<node->getCost()<<endl;
+        cout<<node->getCost()<<endl;
+        node->setParenthood(true);
         unvisited = node->getUnvisited();
         matrix = node->getMatrix();
     }
