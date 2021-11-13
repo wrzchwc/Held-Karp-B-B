@@ -82,7 +82,7 @@ int HeldKarp::get_optimum(vector<int> &subset, int vertex) {
         auto tmp = subset.at(i);
         subset.erase(subset.begin() + i);
         vector<int> key({tmp});
-        key.insert(key.end(), subset.begin(),  subset.end());
+        key.insert(key.end(), subset.begin(), subset.end());
         set.push_back(costs[key] + matrix->getData(tmp, vertex));
         subset.insert(subset.begin() + i, tmp);
     }
