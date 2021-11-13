@@ -13,12 +13,14 @@ private:
 
     static void infiniteColumn(AdjacencyMatrix *matrix, int column);
 
-public:
-    static void travellingSalesman(AdjacencyMatrix *matrix);
+    static void infiniteDiagonal(AdjacencyMatrix *matrix);
 
     static int reduceMatrix(AdjacencyMatrix *matrix);
 
     static void infiniteMatrix(AdjacencyMatrix *matrix, int row, int column);
+
+public:
+    static void travellingSalesman(AdjacencyMatrix *adjacencyMatrix);
 };
 
 
