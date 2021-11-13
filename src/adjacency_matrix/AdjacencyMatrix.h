@@ -30,6 +30,8 @@ public:
     //returns id stored in a specified row and column
     int getData(int row, int column);
 
+    void setData(int data, int row, int column);
+
     //returns number of vertexes
     [[nodiscard]] int getSize() const;
 

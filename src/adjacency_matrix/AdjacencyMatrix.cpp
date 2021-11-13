@@ -87,3 +87,7 @@ void AdjacencyMatrix::initializeMatrix() {
     }
 }
 
+void AdjacencyMatrix::setData(int data, int row, int column) {
+    matrix[row][column] = data;
+}
+
