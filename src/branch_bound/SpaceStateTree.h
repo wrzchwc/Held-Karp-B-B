@@ -6,16 +6,16 @@
 
 class SpaceStateTree {
 private:
-    Node *minimalLeaf;
-    vector<Node *> nodes;
+    shared_ptr<Node> minimalLeaf;
+    vector<shared_ptr<Node>> nodes;
 public:
-    explicit SpaceStateTree(Node *node);
+    explicit SpaceStateTree(const shared_ptr<Node>& node);
 
     virtual ~SpaceStateTree();
 
-    void addNode(Node *node);
+    void addNode(const shared_ptr<Node>& node);
 
-    Node *getMinimalLeaf();
+    shared_ptr<Node> getMinimalLeaf();
 };
 
 

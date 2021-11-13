@@ -22,8 +22,6 @@ AdjacencyMatrix::~AdjacencyMatrix() {
         delete[] matrix[i];
     }
     delete[] matrix;
-    matrix = nullptr;
-    size = 0;
 }
 
 int AdjacencyMatrix::getSize() const {

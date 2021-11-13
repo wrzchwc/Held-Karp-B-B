@@ -9,14 +9,14 @@ using namespace std;
 
 int main() {
     auto matrix = new AdjacencyMatrix("../cmake-build-debug/instances/m8.txt");
-    matrix->content();
-    matrix->setData(89, 0, 0);
-    matrix->setData(98, 2, 2);
-    matrix->setData(65, 4, 4);
-    cout<<endl;
-    matrix->content();
+    auto node = new Node(0, nullptr, matrix, 25, vector<int>({1,2,3,4}));
+    auto tree = new SpaceStateTree(static_cast<const shared_ptr<struct Node>>(node));
+    cout<<tree->getMinimalLeaf()->getCost()<<endl;
+    cout<<tree->getMinimalLeaf()->getParent()<<endl;
+    cout<<tree->getMinimalLeaf()->getID()<<endl;
+    cout<<tree->getMinimalLeaf()->getUnvisited().at(3)<<endl;
+    tree->getMinimalLeaf()->getMatrix()->content();
 
-
-    delete matrix;
+    delete tree;
     return 0;
 }

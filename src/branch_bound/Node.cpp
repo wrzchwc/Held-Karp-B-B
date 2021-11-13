@@ -9,8 +9,8 @@ Node::Node(int id, Node *parent, AdjacencyMatrix *matrix, int cost, const vector
 }
 
 Node::~Node() {
-    parent = nullptr;
-    matrix = nullptr;
+    delete parent;
+    delete matrix;
 }
 
 int Node::getID() const {
