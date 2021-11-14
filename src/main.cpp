@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 #include <vector>
 #include "adjacency_matrix/AdjacencyMatrix.h"
 #include "branch_bound/BranchBound.h"
@@ -9,8 +10,9 @@
 using namespace std;
 
 int main() {
-    auto matrix = new AdjacencyMatrix("../cmake-build-debug/instances/m16.txt");
+    auto matrix = new AdjacencyMatrix("../cmake-build-debug/instances/tsp_15.txt");
     BranchBound::travellingSalesman(matrix);
+
     delete matrix;
     return 0;
 }

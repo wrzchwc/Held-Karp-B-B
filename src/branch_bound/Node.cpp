@@ -1,12 +1,11 @@
 #include "Node.h"
 
-Node::Node(int id, Node *parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited, bool parenthood) {
+Node::Node(int id, Node *parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited) {
     this->id = id;
     this->parent = parent;
     this->matrix = matrix;
     this->cost = cost;
     this->unvisited = unvisited;
-    this->parenthood = parenthood;
 }
 
 Node::~Node() {
@@ -34,10 +33,3 @@ Node *Node::getParent() const {
     return parent;
 }
 
-bool Node::isParent() const {
-    return parenthood;
-}
-
-void Node::setParenthood(bool value) {
-    this->parenthood = value;
-}

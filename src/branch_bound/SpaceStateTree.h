@@ -1,13 +1,13 @@
 #ifndef INC_2_SPACESTATETREE_H
 #define INC_2_SPACESTATETREE_H
 
+#include <map>
 #include <vector>
 #include "Node.h"
 
 class SpaceStateTree {
 private:
-    vector<Node*> nodes;
-//    vector<Node*> leaves;
+    multimap<int, Node *> m;
 public:
     explicit SpaceStateTree(Node *node);
 
@@ -15,7 +15,7 @@ public:
 
     void addNode(Node *node);
 
-    Node * getMinimalLeaf();
+    Node *getMinimalLeaf();
 };
 
 

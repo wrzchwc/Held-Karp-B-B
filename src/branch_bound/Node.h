@@ -11,9 +11,8 @@ private:
     AdjacencyMatrix *matrix;
     int cost;
     vector<int> unvisited;
-    bool parenthood;
 public:
-    Node(int id, Node *parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited, bool parenthood);
+    Node(int id, Node *parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited);
 
     virtual ~Node();
 
@@ -26,10 +25,6 @@ public:
     [[nodiscard]] const vector<int> &getUnvisited() const;
 
     [[nodiscard]] Node *getParent() const;
-
-    bool isParent() const;
-
-    void setParenthood(bool value);
 };
 
 
