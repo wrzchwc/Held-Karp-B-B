@@ -2,20 +2,34 @@
 #include "SpaceStateTree.h"
 
 SpaceStateTree::SpaceStateTree(Node *node) {
-    m.insert({node->getCost(), node});
+    nodes.insert({node->getCost(), node});
 }
 
 void SpaceStateTree::addNode(Node *node) {
     auto parentValue = node->getParent()->getCost();
-    auto iterator = m.find(parentValue);
-    if ( iterator != m.end() && iterator->second == node->getParent()) {
-        m.erase(iterator);
+    auto iterator = nodes.find(parentValue);
+
+    if (iterator != nodes.end()) {
+        while (iterator->second != node->getParent() && iterator->second != nodes.rbegin()->second) {
+            iterator++;
+        }
+
+        if (iterator->second==node->getParent()){
+            nodes.erase(iterator);
+        }
     }
-    m.insert({node->getCost(), node});
+    nodes.insert({node->getCost(), node});
 }
 
 Node *SpaceStateTree::getMinimalLeaf() {
-    return m.begin()->second;
+    auto minimal = nodes.begin();
+    auto value = minimal->first;
+    while (minimal->first == value) {
+        minimal++;
+    }
+    minimal--;
+
+    return minimal->second;
 }
 
 SpaceStateTree::~SpaceStateTree() = default;

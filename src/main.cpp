@@ -10,7 +10,8 @@
 using namespace std;
 
 int main() {
-    auto matrix = new AdjacencyMatrix("../cmake-build-debug/instances/tsp_15.txt");
+    auto matrix = new AdjacencyMatrix("../cmake-build-debug/instances/tsp_17.txt");
+    matrix->content();
     BranchBound::travellingSalesman(matrix);
 
     delete matrix;

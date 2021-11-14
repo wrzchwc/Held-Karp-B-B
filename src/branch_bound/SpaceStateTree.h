@@ -7,7 +7,7 @@
 
 class SpaceStateTree {
 private:
-    multimap<int, Node *> m;
+    multimap<int, Node *> nodes;
 public:
     explicit SpaceStateTree(Node *node);
 

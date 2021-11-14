@@ -29,6 +29,7 @@ void BranchBound::travellingSalesman(AdjacencyMatrix *adjacencyMatrix) {
 
         node = tree->getMinimalLeaf();
         unvisited = node->getUnvisited();
+        cout<<node->getCost()<<" "<<node->getUnvisited().size()<<endl;
         matrix = node->getMatrix();
     }
 
