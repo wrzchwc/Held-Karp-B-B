@@ -27,7 +27,7 @@ void HeldKarp::travelling_salesman() {
         }
     }
 
-    cout << get_hamiltonian_cycle(vertexes);
+    cout << get_hamiltonian_cycle(vertexes)<<endl;
 }
 
 vector<vector<int>> HeldKarp::getSubsets(int *array, int arraySize, int subsetSize) {
@@ -87,11 +87,6 @@ int HeldKarp::get_optimum(vector<int> &subset, int vertex) {
         subset.insert(subset.begin() + i, tmp);
     }
     return *min_element(set.begin(), set.end());
-}
-
-void HeldKarp::displayKey(vector<int> v) {
-    for_each(v.begin(), v.end(), [](const int &n) { cout << n << " "; });
-    cout << endl;
 }
 
 

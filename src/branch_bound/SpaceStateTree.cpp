@@ -6,18 +6,6 @@ SpaceStateTree::SpaceStateTree(Node *node) {
 }
 
 void SpaceStateTree::addNode(Node *node) {
-    auto parentValue = node->getParent()->getCost();
-    auto iterator = nodes.find(parentValue);
-
-    if (iterator != nodes.end()) {
-        while (iterator->second != node->getParent() && iterator->second != nodes.rbegin()->second) {
-            iterator++;
-        }
-
-        if (iterator->second==node->getParent()){
-            nodes.erase(iterator);
-        }
-    }
     nodes.insert({node->getCost(), node});
 }
 
@@ -31,6 +19,17 @@ Node *SpaceStateTree::getMinimalLeaf() {
 
     return minimal->second;
 }
+
+void SpaceStateTree::removeNode(Node *node) {
+    auto iterator = nodes.find(node->getCost());
+    if (iterator != nodes.end()) {
+        while (iterator->second != node) {
+            iterator++;
+        }
+        nodes.erase(iterator);
+    }
+}
+
 
 SpaceStateTree::~SpaceStateTree() = default;
 

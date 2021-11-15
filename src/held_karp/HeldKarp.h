@@ -15,8 +15,6 @@ private:
 
     map<vector<int>, int> costs;
 
-    static void displayKey(vector<int> v);
-
     AdjacencyMatrix *matrix;
 
 
