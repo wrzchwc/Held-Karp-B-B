@@ -1,15 +1,15 @@
 #include "Node.h"
 #include "SpaceStateTree.h"
 
-SpaceStateTree::SpaceStateTree(Node *node) {
-    nodes.insert({node->getCost(), node});
+SpaceStateTree::SpaceStateTree(const shared_ptr<Node>& node) {
+    nodes.insert(pair<int, shared_ptr<Node>>(node->getCost(), node));
 }
 
-void SpaceStateTree::addNode(Node *node) {
-    nodes.insert({node->getCost(), node});
+void SpaceStateTree::addNode(const shared_ptr<Node>& node) {
+    nodes.insert(pair<const int, shared_ptr<Node>>(node->getCost(), node));
 }
 
-Node *SpaceStateTree::getMinimalLeaf() {
+shared_ptr<Node> SpaceStateTree::getMinimalLeaf() {
     auto minimal = nodes.begin();
     auto value = minimal->first;
     while (minimal->first == value) {
@@ -20,7 +20,8 @@ Node *SpaceStateTree::getMinimalLeaf() {
     return minimal->second;
 }
 
-void SpaceStateTree::removeNode(Node *node) {
+
+void SpaceStateTree::removeNode(const shared_ptr<Node>& node) {
     auto iterator = nodes.find(node->getCost());
     if (iterator != nodes.end()) {
         while (iterator->second != node) {

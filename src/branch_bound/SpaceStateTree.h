@@ -8,17 +8,17 @@
 
 class SpaceStateTree {
 private:
-    multimap<int, Node *> nodes;
+    multimap<int, shared_ptr<Node>> nodes;
 public:
-    explicit SpaceStateTree(Node* node);
+    explicit SpaceStateTree(const shared_ptr<Node>& node);
 
     virtual ~SpaceStateTree();
 
-    void addNode(Node *node);
+    void addNode(const shared_ptr<Node>& node);
 
-    void removeNode(Node *node);
+    void removeNode(const shared_ptr<Node>& node);
 
-    Node *getMinimalLeaf();
+    shared_ptr<Node> getMinimalLeaf();
 
 };
 

@@ -19,7 +19,7 @@ void header() {
 int algorithms() {
     auto option = 0;
     cout << "Available algorithms" << endl;
-    cout << "0 Held-Karp" << endl;
+//    cout << "0 Held-Karp" << endl;
     cout << "1 Branch and Bound" << endl;
     cout << "2 Quit" << endl;
     cout << "> ";

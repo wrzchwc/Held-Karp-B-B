@@ -7,12 +7,12 @@
 class Node {
 private:
     int id;
-    Node *parent;
+    shared_ptr<Node> parent;
     AdjacencyMatrix *matrix;
     int cost;
     vector<int> unvisited;
 public:
-    Node(int id, Node *parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited);
+    Node(int id, shared_ptr<Node> parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited);
 
     virtual ~Node();
 
@@ -24,7 +24,6 @@ public:
 
     [[nodiscard]] const vector<int> &getUnvisited() const;
 
-    [[nodiscard]] Node *getParent() const;
 };
 
 

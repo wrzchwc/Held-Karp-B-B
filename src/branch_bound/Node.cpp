@@ -1,15 +1,16 @@
 #include "Node.h"
 
-Node::Node(int id, Node *parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited) {
+#include <utility>
+
+Node::Node(int id, shared_ptr<Node> parent, AdjacencyMatrix *matrix, int cost, const vector<int> &unvisited) {
     this->id = id;
-    this->parent = parent;
+    this->parent = move(parent);
     this->matrix = matrix;
     this->cost = cost;
     this->unvisited = unvisited;
 }
 
 Node::~Node() {
-    delete parent;
     delete matrix;
 }
 
@@ -27,9 +28,5 @@ int Node::getCost() const {
 
 const vector<int> &Node::getUnvisited() const {
     return unvisited;
-}
-
-Node *Node::getParent() const {
-    return parent;
 }
 
