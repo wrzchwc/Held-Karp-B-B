@@ -1,0 +1,7 @@
+../instances/tsp_6_1.txt 30
+../instances/m8.txt 26
+../instances/tsp_10.txt 22
+../instances/tsp_13.txt 18
+../instances/tsp_15.txt 14
+../instances/gr17.txt 10
+../instances/gr21.txt 6

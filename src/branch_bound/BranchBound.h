@@ -20,7 +20,7 @@ private:
     static void infiniteMatrix(AdjacencyMatrix *matrix, int row, int column);
 
 public:
-    static void travellingSalesman(AdjacencyMatrix *adjacencyMatrix);
+    static double travellingSalesman(AdjacencyMatrix *adjacencyMatrix);
 };
 
 

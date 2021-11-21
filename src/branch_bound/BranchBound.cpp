@@ -1,11 +1,15 @@
 #include <algorithm>
+#include <chrono>
 #include <vector>
 #include "../adjacency_matrix/AdjacencyMatrix.h"
 #include "BranchBound.h"
 #include "Node.h"
 #include "SpaceStateTree.h"
 
-void BranchBound::travellingSalesman(AdjacencyMatrix *adjacencyMatrix) {
+using namespace std::chrono;
+
+double BranchBound::travellingSalesman(AdjacencyMatrix *adjacencyMatrix) {
+    auto start = steady_clock::now();
     auto vertexes = adjacencyMatrix->getVertexes(false);
     auto size = adjacencyMatrix->getSize();
     auto matrix = new AdjacencyMatrix(adjacencyMatrix);
@@ -33,10 +37,11 @@ void BranchBound::travellingSalesman(AdjacencyMatrix *adjacencyMatrix) {
         matrix = node->getMatrix();
 
     }
-
     cout << node->getCost() << endl;
-    system("pause");
+    auto end = steady_clock::now();
+
     delete tree;
+    return double(duration_cast<nanoseconds>(end - start).count());
 }
 
 int BranchBound::reduceMatrix(AdjacencyMatrix *matrix) {
