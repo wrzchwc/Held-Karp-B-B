@@ -7,7 +7,7 @@ studies at [Wroclaw University of Science and Technology](https://pwr.edu.pl/en/
 
 ## Introduction
 
-The ask aimed to create the implementation
+The task aimed to create the implementation
 of [Held-Karp algorithm](https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm) and an algorithm based on
 the [Branch & Bound algorithms design paradigm](https://en.wikipedia.org/wiki/Branch_and_bound). The B&B based algorithm
 features `low cost method` to traverse state space tree.
